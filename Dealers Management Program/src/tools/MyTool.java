@@ -73,15 +73,98 @@ public class MyTool {
         } while (input.isEmpty());
         return input;
     } // Ham nhap
-    
+
     public static String readPattern(String message, String pattern) {
         String input = "";
         boolean valid;
-        do {            
+        do {
             System.out.println(message + ": ");
             input = SC.nextLine().trim();
             valid = validStr(input, pattern);
         } while (!valid);
         return input;
+    } //Ham nhap theo bieu thuc chinh quy
+
+    public static boolean readBool(String message) {
+        String input;
+        System.out.println(message + "[1/0-Y/N-T/F]: ");
+        input = SC.nextLine().trim();
+        if (input.isEmpty()) {
+            return false;
+        }
+        char c = Character.toUpperCase(input.charAt(0));
+        return (c == '1' || c == 'Y' || c == 'T');
+    } //Ham nhap boolean
+
+    public static List<String> readLineFromFile(String filename) {
+        File file = new File(filename);
+        if (file.isFile() && file.exists()) {
+            try {
+                String s;
+                List<String> list = new ArrayList();
+                FileReader f = new FileReader(filename);
+                BufferedReader bf = new BufferedReader(f);
+                while ((s = bf.readLine()) != null) {
+                    s = readNonBlank(s);
+                    if (!s.isEmpty()) {
+                        list.add(s);
+                    }
+                }
+                f.close();
+                bf.close();
+                return list;
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+        }
+        return null;
+    }
+
+    public static void writeFile(String filename, List list) {
+        if (list != null && !list.isEmpty()) {
+            try {
+                FileWriter fw = new FileWriter(filename);
+                PrintWriter pw = new PrintWriter(fw);
+                for (Object item : list) {
+                    pw.println(item);
+                }
+                fw.close();
+                pw.close();
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Tests with phone number: "); // - OK
+        System.out.println(validStr("012345678", "\\d{9}|\\d{11}")); //true
+        System.out.println(validStr("0123455691", "\\d{9}|\\d{11}")); //false
+        System.out.println(validStr("12345678", "\\d{9}|\\d{11}")); //false
+        System.out.println("Tests with password: "); // - OK
+        System.out.println(validPassword("qwerty", 8)); //false
+        System.out.println(validPassword("qwertyABC", 8)); //false
+        System.out.println(validPassword("12345678", 8)); //false
+        System.out.println(validPassword("qbc123456", 8)); //false
+        System.out.println(validPassword("qbc@123456", 8)); //true
+        System.out.println("Tests with IDs:"); // - OK
+        System.out.println(validStr("A0001", "D\\d{3}"));
+        System.out.println(validStr("10001", "D\\d{3}"));
+        System.out.println(validStr("D0001", "D\\d{3}"));
+        System.out.println(validStr("D101", "D\\d{3}"));
+        System.out.println("Tests with date format:"); // - OK
+        Date d = parseDate("2022:12:07", "yyyy:MM:dd");
+        System.out.println(d);
+        System.out.println(dataToStr(d, "dd/MM/yyyy")); // - OK 
+        d = parseDate("12/07/2022", "MM/dd/yyyy");
+        System.out.println(d);
+        d = parseDate("2022/07/12", "yyyy/dd/MM");
+        System.out.println(d);
+        d = parseDate("2000/29/02", "yyyy/dd/MM");
+        System.out.println(d);
+        d = parseDate("2000/30/02", "yyyy/dd/MM");
+        System.out.println(d);
+        d = parseDate("2000/40/16", "yyyy/dd/MM");
+        System.out.println(d);
     }
 }
