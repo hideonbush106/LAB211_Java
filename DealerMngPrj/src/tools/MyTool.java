@@ -68,7 +68,7 @@ public class MyTool {
     public static String readNonBlank(String message) { // Ham input
         String input = "";
         do {
-            System.out.println(message + ": ");
+            System.out.print(message + ": ");
             input = SC.nextLine().trim();
         } while (input.isEmpty());
         return input;
@@ -78,7 +78,7 @@ public class MyTool {
         String input = "";
         boolean valid;
         do {
-            System.out.println(message + ": ");
+            System.out.print(message + ": ");
             input = SC.nextLine().trim();
             valid = validStr(input, pattern);
         } while (!valid);
@@ -87,7 +87,7 @@ public class MyTool {
 
     public static boolean readBool(String message) {
         String input;
-        System.out.println(message + "[1/0-Y/N-T/F]: ");
+        System.out.print(message + "[1/0-Y/N-T/F]: ");
         input = SC.nextLine().trim();
         if (input.isEmpty()) {
             return false;
@@ -96,28 +96,27 @@ public class MyTool {
         return (c == '1' || c == 'Y' || c == 'T');
     } //Ham nhap boolean
 
-    public static List<String> readLineFromFile(String filename) {
-        File file = new File(filename);
-        if (file.isFile() && file.exists()) {
+    public static List<String> readLinesFromFile(String filename) {
+        ArrayList<String> list = new ArrayList();
+        File f = new File(filename);
+        if (f.exists()) {
+            String line;
             try {
-                String s;
-                List<String> list = new ArrayList();
-                FileReader f = new FileReader(filename);
-                BufferedReader bf = new BufferedReader(f);
-                while ((s = bf.readLine()) != null) {
-                    s = readNonBlank(s);
-                    if (!s.isEmpty()) {
-                        list.add(s);
+                FileReader fr = new FileReader(f);
+                BufferedReader bf = new BufferedReader(fr);
+                while ((line = bf.readLine()) != null) {
+                    line = line.trim();
+                    if (!line.equals("")) {
+                        list.add(line);
                     }
                 }
-                f.close();
                 bf.close();
-                return list;
+                fr.close();
             } catch (IOException e) {
                 System.out.println(e);
             }
         }
-        return null;
+        return list;
     }
 
     public static void writeFile(String filename, List list) {
@@ -136,35 +135,4 @@ public class MyTool {
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println("Tests with phone number: "); // - OK
-        System.out.println(validStr("012345678", "\\d{9}|\\d{11}")); //true
-        System.out.println(validStr("0123455691", "\\d{9}|\\d{11}")); //false
-        System.out.println(validStr("12345678", "\\d{9}|\\d{11}")); //false
-        System.out.println("Tests with password: "); // - OK
-        System.out.println(validPassword("qwerty", 8)); //false
-        System.out.println(validPassword("qwertyABC", 8)); //false
-        System.out.println(validPassword("12345678", 8)); //false
-        System.out.println(validPassword("qbc123456", 8)); //false
-        System.out.println(validPassword("qbc@123456", 8)); //true
-        System.out.println("Tests with IDs:"); // - OK
-        System.out.println(validStr("A0001", "D\\d{3}"));
-        System.out.println(validStr("10001", "D\\d{3}"));
-        System.out.println(validStr("D0001", "D\\d{3}"));
-        System.out.println(validStr("D101", "D\\d{3}"));
-        System.out.println("Tests with date format:"); // - OK
-        Date d = parseDate("2022:12:07", "yyyy:MM:dd");
-        System.out.println(d);
-        System.out.println(dataToStr(d, "dd/MM/yyyy")); // - OK 
-        d = parseDate("12/07/2022", "MM/dd/yyyy");
-        System.out.println(d);
-        d = parseDate("2022/07/12", "yyyy/dd/MM");
-        System.out.println(d);
-        d = parseDate("2000/29/02", "yyyy/dd/MM");
-        System.out.println(d);
-        d = parseDate("2000/30/02", "yyyy/dd/MM");
-        System.out.println(d);
-        d = parseDate("2000/40/16", "yyyy/dd/MM");
-        System.out.println(d);
-    }
 }
