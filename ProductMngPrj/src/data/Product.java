@@ -11,7 +11,7 @@ import tools.MyTool;
  *
  * @author Admin
  */
-public class Product {
+public class Product implements Comparable<Product> {
 
     public static final String PRODUCT_PATTERN = "[a-zA-Z0-9\" \"]{5,100}";
     public static final String ID_FORMAT = "P\\d{3}";
@@ -90,6 +90,23 @@ public class Product {
     @Override
     public String toString() {
         return productID + SEPARATOR + name + SEPARATOR + price + SEPARATOR + quantity + SEPARATOR + status;
+    }
+
+    @Override
+    public int compareTo(Product product) {
+        if (this.getQuantity() == product.getQuantity()) {
+            if (this.getPrice() > product.getPrice()) {
+                return 1;
+            } else if (this.getPrice() == product.getPrice()) {
+                return 0;
+            } else {
+                return -1;
+            }
+        } else if (this.getQuantity() > product.getQuantity()) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 
 }

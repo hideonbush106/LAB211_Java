@@ -6,6 +6,9 @@ package data;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import tools.MyTool;
@@ -50,12 +53,16 @@ public class ProductList extends ArrayList<Product> {
         }
     }
 
-    public void printAllProductInFile() {
+    public void printAllProductInFile() throws ParseException {
         List<String> lines = MyTool.readLinesFromFile(dataFile);
+        ArrayList<Product> list = new ArrayList<>();
         for (String line : lines) {
-            System.out.println(line);
+            list.add(new Product(line));
         }
-
+        Collections.sort(list);
+        for (Product product : list) {
+            System.out.println(product);
+        }
     }
 
     public void checkExistProduct() {
@@ -157,7 +164,7 @@ public class ProductList extends ArrayList<Product> {
             System.out.println("Not found!");
         } else {
             this.remove(pos);
-            System.out.println("Success");
+            System.out.println("Product has been deleted.");
         }
         changed = true;
     }
@@ -186,7 +193,7 @@ public class ProductList extends ArrayList<Product> {
             this.get(pos).setPrice(price);
             this.get(pos).setQuantity(quantity);
             this.get(pos).setStatus(status);
-            System.out.println("Success");
+            System.out.println("Product has been updated");
         }
         changed = true;
     }
