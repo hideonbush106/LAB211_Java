@@ -21,7 +21,6 @@ import java.io.IOException;
  */
 public class MyTool {
 
-    public static final Scanner SC = new Scanner(System.in);
 
     public static boolean validStr(String str, String regEx) {
         return str.matches(regEx);
@@ -46,6 +45,7 @@ public class MyTool {
         int input = 0;
         do {
             System.out.print(message + ": ");
+            Scanner SC = new Scanner(System.in);
             input = SC.nextInt();
         } while (input <= min && input >= max);
         return input;
@@ -55,6 +55,7 @@ public class MyTool {
         double input = 0;
         do {
             System.out.print(message + ": ");
+            Scanner SC = new Scanner(System.in);
             input = SC.nextDouble();
         } while (input <= min && input >= max);
         return input;
@@ -64,6 +65,7 @@ public class MyTool {
         String input = "";
         do {
             System.out.print(message + ": ");
+            Scanner SC = new Scanner(System.in);
             input = SC.nextLine().trim();
         } while (input.isEmpty());
         return input;
@@ -74,6 +76,7 @@ public class MyTool {
         boolean valid;
         do {
             System.out.print(message + ": ");
+            Scanner SC = new Scanner(System.in);
             input = SC.nextLine().trim();
             valid = validStr(input, pattern);
         } while (!valid);
@@ -83,6 +86,7 @@ public class MyTool {
     public static boolean readBool(String message) {
         String input;
         System.out.print(message + "[1/0-Y/N-T/F]: ");
+        Scanner SC = new Scanner(System.in);
         input = SC.nextLine().trim();
         if (input.isEmpty()) {
             return false;

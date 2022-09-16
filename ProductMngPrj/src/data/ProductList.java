@@ -135,7 +135,7 @@ public class ProductList extends ArrayList<Product> {
         } while (searchProduct(name));
         price = MyTool.readRangeDouble("Price of new product", 0, 10000);
         quantity = MyTool.readRangeInt("Quantity of new product", 0, 1000);
-        status = MyTool.readStatus("Status of new product");
+        status = MyTool.readStatus("Status of new product").toUpperCase();
         Product p = new Product(productID, name, price, quantity, status);
         this.add(p);
         System.out.println("New product has been added.");
@@ -187,7 +187,7 @@ public class ProductList extends ArrayList<Product> {
             } while (searchProduct(name));
             price = MyTool.readRangeDouble("Price of new product", 0, 10000);
             quantity = MyTool.readRangeInt("Quantity of new product", 0, 1000);
-            status = MyTool.readStatus("Status of new product");
+            status = MyTool.readStatus("Status of new product").toUpperCase();
             this.get(pos).setProductID(productID);
             this.get(pos).setName(name);
             this.get(pos).setPrice(price);

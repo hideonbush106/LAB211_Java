@@ -1,6 +1,6 @@
 P002,iPhone 4s,2.2,1,available
 P003,iPhone 11 Pro,17.5,5,Available
 P004,iPhone X,10.2,0,Not Available
-P005,Samsung Galaxy S22,25.5,10,Available
 P006,Samsung Galaxy Note 10,11.2,5,Available
 P999,iPhone 12 Pro Max,23.5,3,Available
+P387,Samsung Galaxy Note 9,2.0,50,Available
