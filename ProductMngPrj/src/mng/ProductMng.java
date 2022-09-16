@@ -39,8 +39,10 @@ public class ProductMng {
                     pList.searchProduct();
                     break;
                 case 5:
+                    pList.updateProduct();
                     break;
                 case 6:
+                    pList.deleteProduct();
                     break;
                 case 7:
                     pList.writeProductToFile();
