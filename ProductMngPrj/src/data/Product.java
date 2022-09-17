@@ -96,16 +96,16 @@ public class Product implements Comparable<Product> {
     public int compareTo(Product product) {
         if (this.getQuantity() == product.getQuantity()) {
             if (this.getPrice() > product.getPrice()) {
-                return 1;
+                return -1;
             } else if (this.getPrice() == product.getPrice()) {
                 return 0;
             } else {
-                return -1;
+                return 1;
             }
         } else if (this.getQuantity() > product.getQuantity()) {
-            return 1;
-        } else {
             return -1;
+        } else {
+            return 1;
         }
     }
 

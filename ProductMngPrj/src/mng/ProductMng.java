@@ -6,7 +6,6 @@ package mng;
 
 import data.ProductList;
 import java.text.ParseException;
-import java.util.Scanner;
 import tools.MyTool;
 
 /**
