@@ -79,13 +79,16 @@ public class ProductList extends ArrayList<Product> {
 
     public void searchProduct() {
         String find = MyTool.readPattern("Enter product name", Product.PRODUCT_PATTERN);
+        boolean cont = true;
         for (Product p : this) {
             if (p.getName().toLowerCase().contains(find.toLowerCase())) {
                 System.out.println(p);
-                return;
+                cont = false;
             }
         }
-        System.out.println("Not found!");
+        if (cont) {
+            System.out.println("Not found!");
+        }
     }
 
     public boolean searchProduct(String name) {
@@ -143,6 +146,7 @@ public class ProductList extends ArrayList<Product> {
         if (changed) {
             MyTool.writeFile(dataFile, this);
             changed = false;
+            System.out.println("Success");
         }
     }
 
